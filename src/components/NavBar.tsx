@@ -85,26 +85,41 @@ export default function Navbar() {
   const navigationPaths = status === "authenticated" ? authPaths : nonAuthPaths;
 
   return (
-    <Box sx={{ width: "100%", position: "fixed", bottom: 0 }}>
-      <BottomNavigation showLabels value={pathname} onChange={handleNavigation}>
+    <Box
+      sx={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        borderTop: 1,
+        borderColor: "divider",
+        bgcolor: "background.paper",
+        zIndex: 1000,
+      }}
+    >
+      <BottomNavigation
+        value={pathname}
+        onChange={handleNavigation}
+        sx={{ height: "60px" }}
+      >
         {navigationPaths.map((path) => (
           <BottomNavigationAction
             key={path.value}
-            label={path.label}
             value={path.value}
             icon={path.icon}
-            sx={{
-              color: pathname === path.value ? "blue" : "inherit",
-            }}
+            label={path.label}
           />
         ))}
-        {/* Sun/Moon Toggle */}
         <IconButton
           onClick={handleThemeToggle}
-          sx={{ position: "absolute", bottom: "10px", right: "10px" }}
-          color="inherit"
+          sx={{
+            position: "absolute",
+            right: 16,
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
         >
-          {isSun ? <Brightness7Icon fontSize="large" /> : <Brightness4Icon fontSize="large" />}
+          {isSun ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
       </BottomNavigation>
     </Box>
